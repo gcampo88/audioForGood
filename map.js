@@ -9,6 +9,11 @@ $(document).ready(function () {
   });
 
   map.on('load', function() {
+    setupMap();
+    addClickListener();
+  });
+
+  function setupMap() {
     map.addLayer({
       "id": "symbols",
       "type": "symbol",
@@ -24,21 +29,26 @@ $(document).ready(function () {
         "text-anchor": "top"
       }
     });
+  }
 
+  function addClickListener() {
     map.on('click', 'symbols', function (e) {
         var clickedFeature = e.features[0];
         map.flyTo({center: clickedFeature.geometry.coordinates});
         $('#iframe').attr('src', "http://play.prx.org/e?uf=http%3A%2F%2Ffeeds.prx.org%2Ftransistor_stem&gs=_blank");
         var episodeDetail = JSON.parse(e.features[0].properties.casts)[0];
-        $('#podcast-title').html(episodeDetail[PODCAST_NAME]);
-        $('#podcast-producer').html(episodeDetail[CREATOR]);
-        $('#podcast-link').html(episodeDetail[PODCAST_LINK]);
-        $('#ep-title').html(episodeDetail[EPISODE_NAME]);
-        $('#ep-feed').html(episodeDetail[PODCAST_FEED]);
-        $('#recommendation').html(episodeDetail[RECOMMENDATION]);
-        $('#recommender').html(episodeDetail[RECOMMENDER]);
-        $('#ep-info').removeClass('hidden');
+        showDetail(episodeDetail)
     });
+  }
 
-  });
+  function showDetail (episodeDetail) {
+    $('#podcast-title').html(episodeDetail[PODCAST_NAME]);
+    $('#podcast-producer').html(episodeDetail[CREATOR]);
+    $('#podcast-link').html(episodeDetail[PODCAST_LINK]);
+    $('#ep-title').html(episodeDetail[EPISODE_NAME]);
+    $('#ep-feed').html(episodeDetail[PODCAST_FEED]);
+    $('#recommendation').html(episodeDetail[RECOMMENDATION]);
+    $('#recommender').html(episodeDetail[RECOMMENDER]);
+    $('#ep-info').removeClass('hidden');
+  }
 });
