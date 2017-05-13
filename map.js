@@ -145,7 +145,8 @@ $(document).ready(function () {
 
   function showDetail (episodeDetail) {
     $('#podcast-title').html(episodeDetail[PODCAST_NAME]);
-    $('#podcast-producer').html(episodeDetail[CREATOR]);
+    console.log(episodeDetail[CREATOR].length);
+    $('#podcast-producer').html(episodeDetail[CREATOR]?"Produced by "+episodeDetail[CREATOR]:"");
     $('#podcast-link').attr('href', episodeDetail[PODCAST_LINK]);
     $('#ep-title').html(episodeDetail[EPISODE_NAME]);
     $('#ep-feed').html(episodeDetail[PODCAST_FEED]);
