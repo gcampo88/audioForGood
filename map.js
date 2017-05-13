@@ -97,8 +97,10 @@ $(document).ready(function () {
     });
 
     document.querySelector("#info>img").addEventListener("click",function() {
-      cast_index = (cast_index+1)%active_casts.length;
-      displayEpisode(active_casts[cast_index]);
+      if (active_casts.length>1) {
+        cast_index = (cast_index+1)%active_casts.length;
+        displayEpisode(active_casts[cast_index]);
+      }
     });
 
     var weAreDraggingThoseHeadphones = false;
