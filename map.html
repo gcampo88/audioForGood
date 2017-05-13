@@ -4,29 +4,31 @@
     <title>audio4good!</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./styles.css">
     <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.css' />
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.js'></script>
+    <link rel="stylesheet" href="./styles.css">
     <script src="./map.js" charset="utf-8"></script>
 </head>
 
   <body>
     <div class="content">
-      <div id='map' class="map" style='width: 100vw; height: 80vh;'></div>
-      <div class='info'>
-        <div id="ep-info" class="hidden">
+      <div id='map' class="map" style='width: 100vw; height: 75vh;'></div>
+      <div id="info" class="hidden">
+        <div id="ep-info">
+          <p id="ep-title"></p><br>
           <a href="#" id="podcast-link">
-            <div id="podcast-title"></div>
-          </a>
-          <div id="podcast-producer"></div>
-          <div id="ep-title"></div>
-          <div id="ep-feed"></div>
-          <div id="recommendation"></div>
-          <div id="recommender"></div>
+            <p id="podcast-title"></p>
+          </a><br>
+          Produced by <p id="podcast-producer"></p><br>
+          <!-- <p id="ep-feed"></p>
+          <p id="ep-guid"></p> -->
+
+          <p id="recommendation"></p> -<p id="recommender"></p>
         </div>
       </div>
-      <iframe class="player" id="iframe" frameborder="0" height="200" width="100%" src="http://play.prx.org/e?uf=http%3A%2F%2Ffeeds.megaphone.fm%2FBUZ7392333932&gs=_blank"></iframe>
+      <h1 id="welcome">Welcome! Click the map to get started.</h1>
+      <iframe class="hidden" id="iframe" frameborder="0" height="200" width="100%" src=""></iframe>
     </div>
   </body>
 </html>
