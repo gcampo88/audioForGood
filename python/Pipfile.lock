@@ -1,0 +1,23 @@
+{
+    "default": {
+        "feedparser": "==5.2.1",
+        "ratelim": "==0.1.6",
+        "unicodecsv": "==0.14.1",
+        "geocoder": "==1.22.5",
+        "requests": "==2.14.2",
+        "six": "==1.10.0",
+        "click": "==6.7",
+        "decorator": "==4.0.11"
+    },
+    "develop": {},
+    "_meta": {
+        "sources": [
+            {
+                "url": "https://pypi.python.org/simple",
+                "verify_ssl": true
+            }
+        ],
+        "requires": {},
+        "Pipfile-sha256": "3a09bfb31f64ffc611b5e0cc8f9318e5cbf8091899eaaf21cdccb0b476e4fb84"
+    }
+}
