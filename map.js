@@ -1,4 +1,13 @@
 $(document).ready(function () {
+  LOCATION = 'Location';
+  PODCAST_NAME = 'Name of Podcast';
+  PODCAST_LINK =  'Podcast Site URL';
+  PODCAST_FEED = 'RSS Feed';
+  CREATOR = 'Creator(s)/Lead Producer Name';
+  EPISODE_NAME = 'Name of Episode';
+  RECOMMENDATION = 'Recommendation Notes';
+  RECOMMENDER = 'Team Six Assignee';
+
   mapboxgl.accessToken = 'pk.eyJ1IjoibWNsYXVnaGxpbiIsImEiOiJjajBwZmpnbDkwMHQxMzNud2ZtandkbGN5In0.pa7_xZbE3ZDF-cfFedFHjw';
 
   var map = new mapboxgl.Map({
@@ -8,7 +17,8 @@ $(document).ready(function () {
     style: 'mapbox://styles/mapbox/light-v9'
   });
 
-  map.on('load', function() {
+  $.getJSON("podcasts.json", function(podcasts) {
+    // ALSO INITIALIZE THE PLAYER HERE PROBABLY
     map.addLayer({
       "id": "symbols",
       "type": "symbol",
