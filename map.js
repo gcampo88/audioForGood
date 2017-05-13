@@ -17,7 +17,7 @@ $(document).ready(function () {
   var map = new mapboxgl.Map({
     container: 'map',
     center: [-95, 38],
-    zoom: 0.5,
+    zoom: 1,
     style: 'mapbox://styles/mapbox/light-v9'
   });
 
