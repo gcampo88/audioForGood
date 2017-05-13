@@ -16,12 +16,15 @@ p {
 .map {
   border-radius: 15px;
 }
-#ep-info {
+#info {
   position: absolute;
   top: 0;
   right: 0;
-  background: lightblue;
+  width: 350px;
+  background-color: rgba(173,216,230,0.5);
   border-radius: 5px;
+}
+#ep-info {
   padding: 15px;
   margin: auto;
   text-align: center;
@@ -35,9 +38,6 @@ p {
 #podcast-title {
   font-size: 16px;
 }
-#podcast-producer {
-}
-#recommendation {
-}
-#recommender {
+#welcome {
+  text-align: center;
 }

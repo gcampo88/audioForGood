@@ -12,3 +12,5 @@ RECOMMENDATION = 'Recommendation Notes';
 DEFAULT_RECOMMENDATION = 'Great episode!'
 RECOMMENDER = 'Team Six Assignee';
 DEFAULT_RECOMMENDER = 'Team Six'
+
+PLAYER_URL = "http://play.prx.org/e?";

@@ -37,7 +37,8 @@ $(document).ready(function () {
         map.flyTo({center: clickedFeature.geometry.coordinates});
         $('#iframe').attr('src', "http://play.prx.org/e?uf=http%3A%2F%2Ffeeds.prx.org%2Ftransistor_stem&gs=_blank");
         var episodeDetail = JSON.parse(e.features[0].properties.casts)[0];
-        showDetail(episodeDetail)
+        showDetail(episodeDetail);
+        updatePlayer(episodeDetail);
     });
   }
 
@@ -50,6 +51,18 @@ $(document).ready(function () {
     $('#ep-guid').html(episodeDetail[EPISODE_GUID]);
     $('#recommendation').html(episodeDetail[RECOMMENDATION] || DEFAULT_RECOMMENDATION);
     $('#recommender').html(episodeDetail[RECOMMENDER] || DEFAULT_RECOMMENDER);
-    $('#ep-info').removeClass('hidden');
+    $('#info').removeClass('hidden');
+    $('#iframe').removeClass('hidden');
+    $('#welcome').addClass('hidden');
+  }
+
+  function updatePlayer (episodeDetail) {
+    var feedUrl = encodeURIComponent(episodeDetail[PODCAST_FEED]);
+    var audioSrc = `${PLAYER_URL}uf=${feedUrl}`;
+    if (episodeDetail[EPISODE_GUID]) {
+      var epGuid = encodeURIComponent(episodeDetail[EPISODE_GUID]);
+      audioSrc += `&ge=${epGuid}`;
+    }
+    $('#iframe').attr('src', audioSrc);
   }
 });
