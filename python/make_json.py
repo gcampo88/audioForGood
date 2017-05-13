@@ -48,7 +48,9 @@ for e in casts:
         continue
     by_location[e['Location']].append(e)
 
-coords = {l:geocoder.google(l).latlng for l in by_location}
+coords = {l:geocoder.google(l).latlng or geocoder.arcgis(l).latlng for l in by_location}
+
+print [k for k,v in coords.iteritems() if not v]
 
 out = {
     "type": "FeatureCollection",
@@ -65,8 +67,8 @@ out = {
                    coords[l][0]
                ]
            }
-       } for l,casts in by_location.iteritems()]
+       } for l,casts in by_location.iteritems() if coords[l]]
 }
 
 with open("podcasts.json","w") as fh:
-    json.dump(out,fh)
+    json.dump(out,fh,indent=1)
