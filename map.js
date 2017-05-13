@@ -5,8 +5,12 @@ $(document).ready(function () {
   PODCAST_FEED = 'RSS Feed';
   CREATOR = 'Creator(s)/Lead Producer Name';
   EPISODE_NAME = 'Name of Episode';
+  EPISODE_GUID = 'guid';
   RECOMMENDATION = 'Recommendation Notes';
+  DEFAULT_RECOMMENDATION = 'Great episode!'
   RECOMMENDER = 'Team Six Assignee';
+  DEFAULT_RECOMMENDER = 'Team Six'
+  PLAYER_URL = "http://play.prx.org/e?";
 
   mapboxgl.accessToken = 'pk.eyJ1IjoibWNsYXVnaGxpbiIsImEiOiJjajBwZmpnbDkwMHQxMzNud2ZtandkbGN5In0.pa7_xZbE3ZDF-cfFedFHjw';
 
@@ -17,17 +21,13 @@ $(document).ready(function () {
     style: 'mapbox://styles/mapbox/light-v9'
   });
 
-
-  $.getJSON("podcasts.json", function(podcasts) {
-    // ALSO INITIALIZE THE PLAYER HERE PROBABLY
-
   map.on('load', function() {
-    setupMap();
-    addClickListener();
-  });
+    $.getJSON("podcasts.json", function(podcasts) {
+      setupMap(podcasts);
+      addClickListener();
+    });
 
-  function setupMap() {
-
+  function setupMap(podcasts) {
     map.addLayer({
       "id": "symbols",
       "type": "symbol",
@@ -48,12 +48,20 @@ $(document).ready(function () {
   function addClickListener() {
     map.on('click', 'symbols', function (e) {
         var clickedFeature = e.features[0];
-        map.flyTo({center: clickedFeature.geometry.coordinates});
-        $('#iframe').attr('src', "http://play.prx.org/e?uf=http%3A%2F%2Ffeeds.prx.org%2Ftransistor_stem&gs=_blank");
-        var episodeDetail = JSON.parse(e.features[0].properties.casts)[0];
-        showDetail(episodeDetail);
-        updatePlayer(episodeDetail);
+        if (clickedFeature) {
+          map.flyTo({center: clickedFeature.geometry.coordinates});
+          var episodeDetail = JSON.parse(clickedFeature.properties.casts)[0];
+          showDetail(episodeDetail);
+          updatePlayer(episodeDetail);
+          swapDisplay();
+        }
     });
+  }
+
+  function swapDisplay () {
+    $('#iframe').removeClass('hidden');
+    $('#info').removeClass('hidden');
+    $('#welcome').addClass('hidden');
   }
 
   function showDetail (episodeDetail) {
@@ -65,9 +73,6 @@ $(document).ready(function () {
     $('#ep-guid').html(episodeDetail[EPISODE_GUID]);
     $('#recommendation').html(episodeDetail[RECOMMENDATION] || DEFAULT_RECOMMENDATION);
     $('#recommender').html(episodeDetail[RECOMMENDER] || DEFAULT_RECOMMENDER);
-    $('#info').removeClass('hidden');
-    $('#iframe').removeClass('hidden');
-    $('#welcome').addClass('hidden');
   }
 
   function updatePlayer (episodeDetail) {
@@ -79,4 +84,5 @@ $(document).ready(function () {
     }
     $('#iframe').attr('src', audioSrc);
   }
+});
 });
