@@ -82,18 +82,23 @@ $(document).ready(function () {
     });
   }
 
-
+  var active_casts = [];
+  cast_index = 0;
 
   function addClickListener() {
     map.on('click', 'symbols', function (e) {
         var clickedFeature = e.features[0];
         if (clickedFeature) {
           map.flyTo({center: clickedFeature.geometry.coordinates});
-          var episodeDetail = JSON.parse(clickedFeature.properties.casts)[0];
-          showDetail(episodeDetail);
-          updatePlayer(episodeDetail);
-          swapDisplay();
+          active_casts = JSON.parse(clickedFeature.properties.casts);
+          cast_index = 0;
+          displayEpisode(active_casts[cast_index]);
         }
+    });
+
+    document.querySelector("#info>img").addEventListener("click",function() {
+      cast_index = (cast_index+1)%active_casts.length;
+      displayEpisode(active_casts[cast_index]);
     });
 
     var weAreDraggingThoseHeadphones = false;
@@ -124,6 +129,12 @@ $(document).ready(function () {
       weAreDraggingThoseHeadphones = false;
     });
 
+  }
+
+  function displayEpisode(episodeDetail) {
+    showDetail(episodeDetail);
+    updatePlayer(episodeDetail);
+    swapDisplay();
   }
 
   function swapDisplay () {
