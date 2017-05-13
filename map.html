@@ -5,53 +5,29 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./styles.css">
-    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.css' />
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.css' />
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script src='https://api.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.js'></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.js'></script>
     <script src="./podcasts.js" charset="utf-8"></script>
+    <script src="./map.js" charset="utf-8"></script>
 </head>
 
-<body>
+  <body>
     <div class="content">
       <div id='map' class="map" style='width: 100vw; height: 80vh;'></div>
       <div class='info'>
-        Chosen episode:
         <div id="ep-info" class="hidden">
-          title url
+          <a href="#" id="podcast-link">
+            <div id="podcast-title"></div>
+          </a>
+          <div id="podcast-producer"></div>
+          <div id="ep-title"></div>
+          <div id="ep-feed"></div>
+          <div id="recommendation"></div>
+          <div id="recommender"></div>
         </div>
       </div>
-
-      <script>
-          mapboxgl.accessToken = 'pk.eyJ1IjoibWNsYXVnaGxpbiIsImEiOiJjajBwZmpnbDkwMHQxMzNud2ZtandkbGN5In0.pa7_xZbE3ZDF-cfFedFHjw';
-
-          var map = new mapboxgl.Map({
-            container: 'map',
-            center: [-95, 38],
-            zoom: 3,
-            style: 'mapbox://styles/mapbox/light-v9'
-          });
-
-          map.on('click', function(e) {
-            $('#ep-info').removeClass('hidden');
-          });
-
-          map.on('load', function() {
-            map.addLayer({
-              "id": "points",
-              "type": "symbol",
-              "source": {
-                "type": "geojson",
-                "data": podcasts
-              },
-              "layout": {
-                "icon-image": "star-15",
-                "text-field": "{name}",
-                "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-                "text-offset": [0, 0.6],
-                "text-anchor": "top"
-              }
-            });
-          });
-        </script>
-      </body>
+      <iframe class="player" id="iframe" frameborder="0" height="200" width="100%" src="http://play.prx.org/e?uf=http%3A%2F%2Ffeeds.megaphone.fm%2FBUZ7392333932&gs=_blank"></iframe>
+    </div>
+  </body>
 </html>
