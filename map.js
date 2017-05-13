@@ -4,7 +4,7 @@ $(document).ready(function () {
   var map = new mapboxgl.Map({
     container: 'map',
     center: [-95, 38],
-    zoom: 0,
+    zoom: 0.5,
     style: 'mapbox://styles/mapbox/light-v9'
   });
 
@@ -44,11 +44,12 @@ $(document).ready(function () {
   function showDetail (episodeDetail) {
     $('#podcast-title').html(episodeDetail[PODCAST_NAME]);
     $('#podcast-producer').html(episodeDetail[CREATOR]);
-    $('#podcast-link').html(episodeDetail[PODCAST_LINK]);
+    $('#podcast-link').attr('href', episodeDetail[PODCAST_LINK]);
     $('#ep-title').html(episodeDetail[EPISODE_NAME]);
     $('#ep-feed').html(episodeDetail[PODCAST_FEED]);
-    $('#recommendation').html(episodeDetail[RECOMMENDATION]);
-    $('#recommender').html(episodeDetail[RECOMMENDER]);
+    $('#ep-guid').html(episodeDetail[EPISODE_GUID]);
+    $('#recommendation').html(episodeDetail[RECOMMENDATION] || DEFAULT_RECOMMENDATION);
+    $('#recommender').html(episodeDetail[RECOMMENDER] || DEFAULT_RECOMMENDER);
     $('#ep-info').removeClass('hidden');
   }
 });

@@ -15,18 +15,17 @@
 
   <body>
     <div class="content">
-      <div id='map' class="map" style='width: 100vw; height: 80vh;'></div>
-      <div class='info'>
-        <div id="ep-info" class="hidden">
-          <a href="#" id="podcast-link">
-            <div id="podcast-title"></div>
-          </a>
-          <div id="podcast-producer"></div>
-          <div id="ep-title"></div>
-          <div id="ep-feed"></div>
-          <div id="recommendation"></div>
-          <div id="recommender"></div>
-        </div>
+      <div id='map' class="map" style='width: 100vw; height: 75vh;'></div>
+      <div id="ep-info" class="hidden">
+        <p id="ep-title"></p><br>
+        <a href="#" id="podcast-link">
+          <p id="podcast-title"></p>
+        </a><br>
+        Produced by <p id="podcast-producer"></p><br>
+        <!-- <p id="ep-feed"></p>
+        <p id="ep-guid"></p> -->
+
+        <p id="recommendation"></p> -<p id="recommender"></p>
       </div>
       <iframe class="player" id="iframe" frameborder="0" height="200" width="100%" src="http://play.prx.org/e?uf=http%3A%2F%2Ffeeds.megaphone.fm%2FBUZ7392333932&gs=_blank"></iframe>
     </div>
