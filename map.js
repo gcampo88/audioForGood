@@ -17,9 +17,29 @@ $(document).ready(function () {
     style: 'mapbox://styles/mapbox/light-v9'
   });
 
+  function reverseGeocode(lat,lng) {
+    return new Promise(function(resolve,reject) {
+      $.getJSON("https://api.mapbox.com/geocoding/v5/mapbox.places/"+lng+","+lat+".json",
+        {access_token: mapboxgl.accessToken,types:"region,place,locality,neighborhood"})
+       .then(function(d) {
+        resolve(d.features.map(function(f) {
+          return f.text;
+          // return [f.text,f.place_type[0]];
+        }));
+       },reject);
+    });
+  }
+
+  function audiosearchQuery(q) {
+    return $.getJSON("https://www.audiosear.ch/api/search/episodes/"+q,
+      {entities_filter:1})
+  }
+
 
   $.getJSON("podcasts.json", function(podcasts) {
     // ALSO INITIALIZE THE PLAYER HERE PROBABLY
+
+  var searchtarget = {type: "Point", coordinates: [0,0]};
 
   map.on('load', function() {
     setupMap();
@@ -43,7 +63,21 @@ $(document).ready(function () {
         "text-anchor": "top"
       }
     });
+
+    map.addSource('searchtarget', { type: 'geojson', data: searchtarget });
+
+    map.addLayer({
+      "id": "searchtarget",
+      "type": "symbol",
+      "source": "searchtarget",
+      "layout": {
+        "icon-image": "marker-15",
+        'visibility': 'none'
+      }
+    });
   }
+
+
 
   function addClickListener() {
     map.on('click', 'symbols', function (e) {
@@ -54,6 +88,35 @@ $(document).ready(function () {
         showDetail(episodeDetail);
         updatePlayer(episodeDetail);
     });
+
+    var weAreDraggingThoseHeadphones = false;
+
+    map.on('mouseup',function(e) {
+      if (weAreDraggingThoseHeadphones) {
+        var lng = e.lngLat.lng;
+        var lat = e.lngLat.lat;
+        searchtarget.coordinates = [e.lngLat.lng,e.lngLat.lat];
+        map.getSource('searchtarget').setData(searchtarget);
+        map.setLayoutProperty('searchtarget', 'visibility', 'visible');
+        reverseGeocode(lat,lng).then(function(d) {
+          var search_str = '"'+d.join('" "')+'"';
+          console.log(search_str);
+        });
+          // return audiosearchQuery(search_str);
+        // }).then(function(d) {
+        //   console.log(d);
+        // });
+      };
+    });
+
+    document.querySelector(".dragsource").addEventListener("mousedown", function() {
+      weAreDraggingThoseHeadphones = true;
+    });
+
+    document.addEventListener("mouseup",function() {
+      weAreDraggingThoseHeadphones = false;
+    });
+
   }
 
   function showDetail (episodeDetail) {
@@ -79,4 +142,5 @@ $(document).ready(function () {
     }
     $('#iframe').attr('src', audioSrc);
   }
+});
 });

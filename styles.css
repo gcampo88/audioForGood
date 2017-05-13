@@ -41,3 +41,7 @@ p {
 #welcome {
   text-align: center;
 }
+.dragsource {
+  position: fixed;
+  font-size: 3em;
+}
