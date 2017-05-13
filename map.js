@@ -4,7 +4,7 @@ $(document).ready(function () {
   var map = new mapboxgl.Map({
     container: 'map',
     center: [-95, 38],
-    zoom: 3,
+    zoom: 0,
     style: 'mapbox://styles/mapbox/light-v9'
   });
 
