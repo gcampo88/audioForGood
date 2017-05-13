@@ -10,7 +10,7 @@ $(document).ready(function () {
   DEFAULT_RECOMMENDATION = 'Great episode!'
   RECOMMENDER = 'Team Six Assignee';
   DEFAULT_RECOMMENDER = 'Team Six'
-  PLAYER_URL = "http://play.prx.org/e?";
+  PLAYER_URL = "https://play.prx.org/e?";
 
   mapboxgl.accessToken = 'pk.eyJ1IjoibWNsYXVnaGxpbiIsImEiOiJjajBwZmpnbDkwMHQxMzNud2ZtandkbGN5In0.pa7_xZbE3ZDF-cfFedFHjw';
 
