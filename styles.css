@@ -6,6 +6,10 @@ div {
 p {
   display: inline-block;
 }
+a {
+  text-decoration: none;
+  color: inherit;
+}
 .content {
     margin: 0;
     padding: 0;
@@ -16,32 +20,49 @@ p {
 .map {
   border-radius: 15px;
 }
+img {
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+}
 #info {
   position: absolute;
   top: 0;
   right: 0;
-  width: 350px;
-  background-color: rgba(173,216,230,0.5);
+  width: 40%;
+  height: auto;
+  min-width: 350px;
+  min-height: 350px;
+
   border-radius: 5px;
 }
 #ep-info {
-  padding: 15px;
-  margin: auto;
+  color: white;
+  font-size: 16px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 50%;
+  height: 60%;
+  margin: 35% auto;
+  overflow: scroll;
   text-align: center;
 }
 .hidden {
   display: none;
 }
 #ep-title {
-  font-weight: bolder;
-}
-#podcast-title {
-  font-size: 16px;
+  font-size: 20px;
 }
 #welcome {
   text-align: center;
+  font-weight: lighter;
+  margin: 55px auto;
 }
 .dragsource {
   position: fixed;
+  top: 0;
   font-size: 3em;
 }
